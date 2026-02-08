@@ -95,7 +95,7 @@ z-index:0;
 </nav>
 
 <section class="hero">
-<h1>The future of scripting and exploiting.</h1>
+<h1>Revolutionizing the future ⚡ of execution</h1>
 <p>Modern scripting experience powered by performance and style.</p>
 
 <button class="download-btn"
@@ -123,7 +123,6 @@ window.onresize=resize;
 let rockets=[];
 let particles=[];
 
-/* PARTICLE CLASS */
 function spawnFlame(x,y){
 particles.push({
 x,y,
@@ -135,7 +134,6 @@ fade:0.02
 });
 }
 
-/* CLICK PARTICLES */
 window.addEventListener("click",e=>{
 for(let i=0;i<40;i++){
 particles.push({
@@ -150,7 +148,6 @@ fade:0.03
 }
 });
 
-/* ROCKET */
 function createRocket(){
 return{
 x:Math.random()*canvas.width,
@@ -165,13 +162,11 @@ setInterval(()=>{
 rockets.push(createRocket());
 },1400);
 
-/* DRAW ROCKET */
 function drawRocket(r){
 ctx.save();
 ctx.translate(r.x,r.y);
 ctx.rotate(r.angle);
 
-/* body */
 ctx.fillStyle="white";
 ctx.beginPath();
 ctx.moveTo(0,-22);
@@ -180,13 +175,11 @@ ctx.lineTo(-8,12);
 ctx.closePath();
 ctx.fill();
 
-/* window */
 ctx.fillStyle="#6c63ff";
 ctx.beginPath();
 ctx.arc(0,-5,3,0,Math.PI*2);
 ctx.fill();
 
-/* fins */
 ctx.fillStyle="white";
 ctx.fillRect(-12,8,6,6);
 ctx.fillRect(6,8,6,6);
@@ -194,18 +187,14 @@ ctx.fillRect(6,8,6,6);
 ctx.restore();
 }
 
-/* LOOP */
 function animate(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
-/* rockets */
 rockets.forEach((r,i)=>{
 r.x+=r.vx;
 r.y+=r.vy;
-
 drawRocket(r);
 
-/* flame trail */
 for(let j=0;j<2;j++){
 spawnFlame(r.x,r.y+10);
 }
@@ -213,15 +202,13 @@ spawnFlame(r.x,r.y+10);
 if(r.y<-60)rockets.splice(i,1);
 });
 
-/* particles */
 particles.forEach((p,i)=>{
 p.x+=p.vx;
 p.y+=p.vy;
 p.life-=p.fade;
 
-let alpha=p.life;
 ctx.beginPath();
-ctx.fillStyle=`rgba(255,${150+Math.random()*100},0,${alpha})`;
+ctx.fillStyle=`rgba(255,${150+Math.random()*100},0,${p.life})`;
 ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
 ctx.fill();
 
